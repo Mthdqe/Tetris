@@ -1,4 +1,4 @@
-SRC = src/main.c src/play.c src/block.c src/read.c
+SRC = src/main.c src/play.c src/block.c src/read.c src/grid.c
 CFLAGS = -Wall -Wextra -std=c99 -fsanitize=address
 FLAGS = -lSDL
 BIN = tetris
