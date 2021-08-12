@@ -1,4 +1,5 @@
 #include <SDL/SDL.h>
+#include <unistd.h>
 #include "../headers/const.h"
 
 void init_grid(Cell grid[][CELL_W])
@@ -42,8 +43,10 @@ static void drop_grid(Cell grid[][CELL_W], size_t index)
     }
 }
 
-void check_lines(Cell grid[][CELL_W])
+size_t check_lines(Cell grid[][CELL_W])
 {
+    size_t score = 0;
+
     for (size_t i = 1; i < CELL_H; i++)
     {
         size_t j = 0;
@@ -52,8 +55,13 @@ void check_lines(Cell grid[][CELL_W])
             j++;
 
         if (j == CELL_W)
+        {
             drop_grid(grid, i);
+            score += 1;
+        }
     }
+
+    return score;
 }
 
 int check_lose(Cell grid[][CELL_W])

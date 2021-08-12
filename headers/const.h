@@ -12,7 +12,8 @@
 
 #define NB_CELLS CELL_W * CELL_H
 
-#define FALL_FREQ 300
+#define FALL_FREQ 500
+#define FALL_FREQ_LIMIT 50
 #define MOVE_FREQ 150
 
 typedef enum Dir Dir;

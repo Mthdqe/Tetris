@@ -4,9 +4,7 @@
 
 void init_block(Block* block, SDL_Surface* screen)
 {
-    Shape shape = rand() % 8;
-    //Shape shape = O;
-
+    Shape shape = rand() % 7;
     block->shape = shape;
     block->x = (CELL_W - 1) / 2;
     block->y = 0;

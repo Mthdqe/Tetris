@@ -1,4 +1,5 @@
 #include <SDL/SDL.h>
+#include <time.h>
 #include "../headers/const.h"
 #include "../headers/block.h"
 #include "../headers/grid.h"
@@ -7,8 +8,9 @@ void play(SDL_Surface* screen)
 {
     int leave = 0;
     int ticks, fallTime = 0, moveTime = 0, rotateTime = 0;
-    int fall_freq = FALL_FREQ;
+    int fall_freq = FALL_FREQ, fall_freq_atm = FALL_FREQ;
     int score = 0;
+    int partial_score = 0;
     SDL_Event event;
     Uint32 bgColor = SDL_MapRGB(screen->format, 30, 30, 30);
     SDL_Surface* img = SDL_CreateRGBSurface(SDL_HWSURFACE, CELL - 2, CELL - 2, 32, 0, 0, 0, 0);
@@ -16,13 +18,15 @@ void play(SDL_Surface* screen)
     Cell grid[CELL_H][CELL_W];
     Dir dir = NONE;
 
+    srand(time(NULL));
+
     init_block(block, screen);
     init_grid(grid);
 
     while (!leave)
     {
         dir = NONE;
-        fall_freq = FALL_FREQ;
+        fall_freq = fall_freq_atm;
 
         SDL_PollEvent(&event);
 
@@ -74,11 +78,19 @@ void play(SDL_Surface* screen)
                 leave = check_lose(grid);
                 if (!leave)
                 {
-                    check_lines(grid);
+                    partial_score = check_lines(grid);
+                    score += partial_score;
                     init_block(block, screen);
-                    score++;
+
+                    if (fall_freq_atm > FALL_FREQ_LIMIT)
+                    {
+                        fall_freq_atm -= 20 * partial_score;
+                        if (fall_freq_atm < FALL_FREQ_LIMIT)
+                            fall_freq_atm = FALL_FREQ_LIMIT;
+                    }
                 }
             }
+
             fallTime = ticks;
         }
 
