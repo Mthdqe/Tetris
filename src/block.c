@@ -1,6 +1,6 @@
 #include <SDL/SDL.h>
+#include <string.h>
 #include "../headers/const.h"
-#include "../headers/read.h"
 
 void init_block(struct Block* block, SDL_Surface* screen)
 {
@@ -9,55 +9,104 @@ void init_block(struct Block* block, SDL_Surface* screen)
     block->x = (CELL_W - 1) / 2;
     block->y = 0;
 
+    static int o_shape[4][4] = {
+        { 1, 1, 0, 0 },
+        { 1, 1, 0, 0 },
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 }
+    };
+
+    static int i_shape[4][4] = {
+        { 1, 0, 0, 0 },
+        { 1, 0, 0, 0 },
+        { 1, 0, 0, 0 },
+        { 1, 0, 0, 0 }
+    };
+
+    static int s_shape[4][4] = {
+        { 0, 1, 1, 0 },
+        { 1, 1, 0, 0 },
+        { 0, 0, 0 ,0 },
+        { 0, 0, 0, 0 }
+    };
+
+    static int z_shape[4][4] = {
+        { 1, 1, 0, 0 },
+        { 0, 1, 1, 0 },
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 }
+    };
+
+    static int l_shape[4][4] = {
+        { 1, 0, 0, 0 },
+        { 1, 0, 0 ,0 },
+        { 1, 1, 0, 0 },
+        { 0, 0, 0, 0 }
+    };
+
+    static int j_shape[4][4] = {
+        { 0, 1, 0, 0 },
+        { 0, 1, 0, 0 },
+        { 1, 1, 0, 0 },
+        { 0, 0, 0, 0 }
+    };
+
+    static int t_shape[4][4] = {
+        { 1, 1, 1, 0 },
+        { 0, 1, 0, 0 },
+        { 0, 0, 0, 0 },
+        { 0, 0, 0, 0 }
+    };
+
     switch(shape)
     {
         case O:
             block->w = 2;
             block->h = 2;
             block->color = SDL_MapRGB(screen->format, 255, 255, 0);
-            read(block, "Shapes/o");
+            memcpy(block->grid, o_shape, sizeof(int) * 16);
             break;
 
         case I:
             block->w = 1;
             block->h = 4;
             block->color = SDL_MapRGB(screen->format, 0, 255, 255);
-            read(block, "Shapes/i");
+            memcpy(block->grid, i_shape, sizeof(int) * 16);
             break;
 
         case S:
             block->w = 3;
             block->h = 2;
             block->color = SDL_MapRGB(screen->format, 0, 255, 0);
-            read(block, "Shapes/s");
+            memcpy(block->grid, s_shape, sizeof(int) * 16);
             break;
 
         case Z:
             block->w = 3;
             block->h = 2;
             block->color = SDL_MapRGB(screen->format, 255, 0, 0);
-            read(block, "Shapes/z");
+            memcpy(block->grid, z_shape, sizeof(int) * 16);
             break;
 
         case L:
             block->w = 2;
             block->h = 3;
             block->color = SDL_MapRGB(screen->format, 255, 100, 0);
-            read(block, "Shapes/l");
+            memcpy(block->grid, l_shape, sizeof(int) * 16);
             break;
 
         case J:
             block->w = 2;
             block->h = 3;
             block->color = SDL_MapRGB(screen->format, 0, 0, 255);
-            read(block, "Shapes/j");
+            memcpy(block->grid, j_shape, sizeof(int) * 16);
             break;
 
         case T:
             block->w = 3;
             block->h = 2;
             block->color = SDL_MapRGB(screen->format, 255, 0, 255);
-            read(block, "Shapes/t");
+            memcpy(block->grid, t_shape, sizeof(int) * 16);
             break;
     }
 }
