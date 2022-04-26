@@ -2,9 +2,9 @@
 #include "../headers/const.h"
 #include "../headers/read.h"
 
-void init_block(Block* block, SDL_Surface* screen)
+void init_block(struct Block* block, SDL_Surface* screen)
 {
-    Shape shape = rand() % 7;
+    enum Shape shape = rand() % 7;
     block->shape = shape;
     block->x = (CELL_W - 1) / 2;
     block->y = 0;
@@ -62,7 +62,7 @@ void init_block(Block* block, SDL_Surface* screen)
     }
 }
 
-void display_block(Block* block, SDL_Surface* img, SDL_Surface* screen)
+void display_block(struct Block* block, SDL_Surface* img, SDL_Surface* screen)
 {
     SDL_Rect coord;
 
@@ -82,7 +82,7 @@ void display_block(Block* block, SDL_Surface* img, SDL_Surface* screen)
     }
 }
 
-int fall_block(Block* block, Cell grid[][CELL_W])
+int fall_block(struct Block* block, struct Cell grid[][CELL_W])
 {
     int fallen = 0;
     size_t i = 0, j = 0, next;
@@ -126,7 +126,7 @@ int fall_block(Block* block, Cell grid[][CELL_W])
     return fallen;
 }
 
-void move_block(Block* block, Dir dir, Cell grid[][CELL_W])
+void move_block(struct Block* block, enum Dir dir, struct Cell grid[][CELL_W])
 {
     int move = 1;
     int step = 1;
@@ -164,7 +164,7 @@ static void reverse(size_t* a, size_t* b)
     *b = temp;
 }
 
-void rotate_block(Block* block, Cell grid[][CELL_W])
+void rotate_block(struct Block* block, struct Cell grid[][CELL_W])
 {
     int new[4][4] = {0};
     int rotate = 1;

@@ -2,19 +2,19 @@
 #include <unistd.h>
 #include "../headers/const.h"
 
-void init_grid(Cell grid[][CELL_W])
+void init_grid(struct Cell grid[][CELL_W])
 {
     for (size_t i = 0; i < CELL_H; i++)
     {
         for (size_t j = 0; j < CELL_W; j++)
         {
-            Cell c = {1, 0};
+            struct Cell c = {1, 0};
             grid[i][j] = c;
         }
     }
 }
 
-void display_grid(Cell grid[][CELL_W], SDL_Surface* img, SDL_Surface* screen)
+void display_grid(struct Cell grid[][CELL_W], SDL_Surface* img, SDL_Surface* screen)
 {
     SDL_Rect coord;
 
@@ -34,7 +34,7 @@ void display_grid(Cell grid[][CELL_W], SDL_Surface* img, SDL_Surface* screen)
     }
 }
 
-static void drop_grid(Cell grid[][CELL_W], size_t index)
+static void drop_grid(struct Cell grid[][CELL_W], size_t index)
 {
     for (size_t i = index; i > 0; i--)
     {
@@ -43,7 +43,7 @@ static void drop_grid(Cell grid[][CELL_W], size_t index)
     }
 }
 
-size_t check_lines(Cell grid[][CELL_W])
+size_t check_lines(struct Cell grid[][CELL_W])
 {
     size_t score = 0;
 
@@ -64,7 +64,7 @@ size_t check_lines(Cell grid[][CELL_W])
     return score;
 }
 
-int check_lose(Cell grid[][CELL_W])
+int check_lose(struct Cell grid[][CELL_W])
 {
     size_t j = 0;
 

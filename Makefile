@@ -1,10 +1,19 @@
-SRC = src/main.c src/play.c src/block.c src/read.c src/grid.c
-CFLAGS = -Wall -Wextra -std=c99 -g -fsanitize=address
-FLAGS = -lSDL
+CC = gcc
+OBJS = src/block.o src/grid.o src/main.o src/play.o src/read.o
+CFLAGS = -Wall -Wextra -Werror -std=c99 -pedantic -Iheaders
+DFLAGS =
+LDLIBS = -lSDL
 BIN = tetris
 
-all:
-	gcc $(SRC) $(FLAGS) $(CFLAGS) -o $(BIN)
+all: $(BIN)
 
+$(BIN): $(OBJS)
+	$(CC) $^ $(CFLAGS) $(DFLAGS) $(LDLIBS) -o $@
+
+check: CFLAGS += -g -fsanitize=address
+check: $(BIN)
+
+.PHONY: clean
 clean:
-	rm $(BIN)
+	$(RM) $(OBJS) $(BIN)
+

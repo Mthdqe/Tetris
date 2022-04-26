@@ -14,9 +14,9 @@ void play(SDL_Surface* screen)
     SDL_Event event;
     Uint32 bgColor = SDL_MapRGB(screen->format, 30, 30, 30);
     SDL_Surface* img = SDL_CreateRGBSurface(SDL_HWSURFACE, CELL - 2, CELL - 2, 32, 0, 0, 0, 0);
-    Block* block = malloc(sizeof(struct Block));
-    Cell grid[CELL_H][CELL_W];
-    Dir dir = NONE;
+    struct Block* block = malloc(sizeof(struct Block));
+    struct Cell grid[CELL_H][CELL_W];
+    enum Dir dir = NONE;
 
     srand(time(NULL));
 

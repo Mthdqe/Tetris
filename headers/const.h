@@ -16,7 +16,6 @@
 #define FALL_FREQ_LIMIT 50
 #define MOVE_FREQ 150
 
-typedef enum Dir Dir;
 enum Dir
 {
     RIGHT,
@@ -24,7 +23,6 @@ enum Dir
     NONE
 };
 
-typedef enum Shape Shape;
 enum Shape
 {
     O,
@@ -36,14 +34,12 @@ enum Shape
     T
 };
 
-typedef struct Cell Cell;
 struct Cell
 {
     int empty;
     Uint32 color;
 };
 
-typedef struct Block Block;
 struct Block
 {
     size_t x;
@@ -51,7 +47,7 @@ struct Block
     size_t w;
     size_t h;
     Uint32 color;
-    Shape shape;
+    enum Shape shape;
     int grid[4][4];
 };
 

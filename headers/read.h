@@ -1,6 +1,6 @@
 #ifndef READ_H
 #define READ_H
 
-void read(Block* block, char* filename);
+void read(struct Block* block, char* filename);
 
 #endif

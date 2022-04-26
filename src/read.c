@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "../headers/const.h"
 
-void read(Block* block, char* filename)
+void read(struct Block* block, char* filename)
 {
     FILE* f = fopen(filename, "r");
 

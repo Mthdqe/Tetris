@@ -3,9 +3,9 @@
 
 #include <unistd.h>
 
-void init_grid(Cell grid[][CELL_W]);
-void display_grid(Cell grid[][CELL_W], SDL_Surface* img, SDL_Surface* screen);
-size_t check_lines(Cell grid[][CELL_W]);
-int check_lose(Cell grid[][CELL_W]);
+void init_grid(struct Cell grid[][CELL_W]);
+void display_grid(struct Cell grid[][CELL_W], SDL_Surface* img, SDL_Surface* screen);
+size_t check_lines(struct Cell grid[][CELL_W]);
+int check_lose(struct Cell grid[][CELL_W]);
 
 #endif
